@@ -1,4 +1,5 @@
 const tsImportPluginFactory = require('ts-import-plugin')
+const rewireLess = require('react-app-rewire-less');
 const { getLoader } = require("react-app-rewired");
 module.exports = function override(config, env) {
   // do stuff with the webpack config...
@@ -14,10 +15,14 @@ module.exports = function override(config, env) {
     getCustomTransformers: () => ({
       before: [ tsImportPluginFactory({
         libraryDirectory: 'es',
-        libraryName: 'antd',
-        style: 'css',
+        libraryName: 'antd-mobile',
+        style: true,
       }) ]
     })
   };
+  config = rewireLess.withLoaderOptions({
+    javascriptEnabled: true,
+    modifyVars: { "@primary-color": "#1DA57A" },
+  })(config, env);
   return config;
 };
