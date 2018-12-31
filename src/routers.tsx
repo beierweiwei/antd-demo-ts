@@ -6,7 +6,7 @@ import User from './pages/user';
 const AppRouter = () => (
   <Router>
     <div>
-      <Route path="/" component={Home} />
+      <Route path="/" exact={true} component={Home} />
       <Route path="/user" component={User} />
     </div>
   </Router>
