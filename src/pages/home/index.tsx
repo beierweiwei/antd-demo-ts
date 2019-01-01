@@ -19,7 +19,7 @@ interface HomePageState {
 }
 
 class HomePage extends React.Component<HomePageProps, HomePageState> {
-  constructor (props:any) {
+  constructor (props:HomePageProps) {
     super(props)
     this.state = {
       imgHeight: 'auto',
@@ -101,12 +101,17 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         _id: 'xxxxxxxxxxxxx',
       }]
     }
+    console.log(props)
     this.handelRenderItem = this.handelRenderItem.bind(this)
   }
 
   handelRenderItem (el:Element, index:number) {
     const item:ProductProps = this.state.productList[index]
     return (<ProductItem title={item.title} thumb={item.thumb} price={item.price} sales={item.sales} unit={item.unit} _id={item._id}/>)
+  }
+  componentDidMount () {
+    console.log('mount')
+    this.props.fetchProducts()
   }
   render () {
     return (
