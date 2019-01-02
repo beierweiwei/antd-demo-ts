@@ -20,9 +20,9 @@ action:ProductAction)
         pageSize: query.pageSize || state.pageSize
       }
     case actions.RECEIVE_PRODUCTS:
-      console.log('xxxxxxxxxxxxxx')
       return {
         ...state,
+        isLoading: false,
         list: [
           ...state.list,
           ...action.data.list

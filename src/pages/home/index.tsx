@@ -29,8 +29,8 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     this.state = {
       // 下拉刷新参数
       refreshing: false,
-      down: true,
-      height: document.documentElement.clientHeight,
+      down: false,
+      height: (document.documentElement as HTMLElement).clientHeight,
       imgHeight: 'auto',
       activities: [
         {
@@ -56,7 +56,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     }
     this.handelRenderItem = this.handelRenderItem.bind(this)
     this.handelOnFresh = this.handelOnFresh.bind(this)
-    this.getScrollContainer = this.getScrollContainer.bind(this)
+    // this.getScrollContainer = this.getScrollContainer.bind(this)
   }
 
   handelRenderItem (el:Element, index:number) {
@@ -71,14 +71,8 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     this.props.fetchProducts()
   }
   handelOnFresh () {
-    console.log('xxxxxxxxxxxxx')
-    // this.setState({ refreshing: true })
-    // setTimeout(() => {
-    //   this.setState({ refreshing: false })
-    // }, 1000)
-  }
-  getScrollContainer () {
-    return this.ptr 
+    this.props.requestProducts()
+    setTimeout(() => this.props.fetchProducts())
   }
   render () {
     return (
@@ -118,7 +112,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               itemStyle={{padding: '10px'}}
             />
             </div>
-            {/* <PullToRefresh
+            <PullToRefresh
               damping={60}
               ref={el => this.ptr  = el}
               style={{
@@ -127,13 +121,11 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               }}
               indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
               direction={this.state.down ? 'down' : 'up'}
-              refreshing={this.state.refreshing}
+              refreshing={this.props.products.isLoading}
               onRefresh={this.handelOnFresh}
               distanceToRefresh={25}
-              getScrollContainer={this.getScrollContainer}
-
-            > */}
-     
+              
+            >
             <div className="product-list">
               <Grid 
               data={this.props.products.list}
@@ -145,9 +137,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               itemStyle={{padding: '10px'}}
             />
             </div>
-       
-            {/* </PullToRefresh> */}
-         
+            </PullToRefresh>
         </div>
         <BottomNav curtPage="home"/>
       </div>
