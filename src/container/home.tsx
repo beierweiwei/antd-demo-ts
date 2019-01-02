@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import HomePage from '../pages/home'
-import { StoreState } from '../types'
 import { fetchProducts } from '../store/actions'
 import { ThunkDispatch } from 'redux-thunk';
 const mapStateToprops = ({products}:StoreState) => {

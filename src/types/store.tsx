@@ -1,0 +1,3 @@
+interface StoreState {
+  products: ProductState
+}

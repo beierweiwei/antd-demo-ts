@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import { actions } from '../../constants'
-import { ProductState } from '../../types'
+// import { ProductState } from '../../types'
 import { ProductAction } from '../actions'
 function products (state:ProductState = {
-  curtPage: 1,
+  curtPage: 0,
   pageSize: 10,
   isLoading: false,
   list: []
@@ -11,14 +11,16 @@ function products (state:ProductState = {
 action:ProductAction) 
 {
   switch (action.type) {
-    case actions.REQUEST_RODUCTS:
+    case actions.REQUEST_PRODUCTS:
+      const query = action.query || {}
       return {
         ...state,
         isLoading: true,
-        curtPage: action.query.curtPage || 1,
-        pageSize: action.query.pageSize || 10,
+        curtPage: query.curtPage || state.curtPage + 1,
+        pageSize: query.pageSize || state.pageSize
       }
     case actions.RECEIVE_PRODUCTS:
+      console.log('xxxxxxxxxxxxxx')
       return {
         ...state,
         list: [

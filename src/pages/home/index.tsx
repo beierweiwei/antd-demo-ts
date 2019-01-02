@@ -1,6 +1,7 @@
-import { Carousel, Grid } from 'antd-mobile'
-import ProductItem, {ProductProps} from '../../components/productItem'
+import { Grid, PullToRefresh } from 'antd-mobile'
+import ProductItem from '../../components/productItem'
 import * as React from 'react'
+// import * as ReactDOM from 'react-dom'
 import BottomNav from '../../components/loayout/bottomNav'
 import './index.less'
 interface HomePageProps {
@@ -14,14 +15,22 @@ interface ActivitiesProps {
 }
 interface HomePageState {
   imgHeight: string,
-  activities: ActivitiesProps[],
-  productList: ProductProps[]
+  activities: ActivitiesProps[]
+  productList: Product[]
+  refreshing: boolean
+  height: number
+  down: boolean
 }
 
 class HomePage extends React.Component<HomePageProps, HomePageState> {
+  ptr:PullToRefresh | null
   constructor (props:HomePageProps) {
     super(props)
     this.state = {
+      // 下拉刷新参数
+      refreshing: false,
+      down: true,
+      height: document.documentElement.clientHeight,
       imgHeight: 'auto',
       activities: [
         {
@@ -43,80 +52,38 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
           _id: 'xxxxxxxxxxxxx'
         }
       ],
-      productList: [{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      },{
-        title: 'xxxxxxxxxxxxxx',
-        thumb: '/static/imgs/test.jpg',
-        sales: 100,
-        price: 200,
-        unit: '件',
-        _id: 'xxxxxxxxxxxxx',
-      }]
+      productList: []
     }
-    console.log(props)
     this.handelRenderItem = this.handelRenderItem.bind(this)
+    this.handelOnFresh = this.handelOnFresh.bind(this)
+    this.getScrollContainer = this.getScrollContainer.bind(this)
   }
 
   handelRenderItem (el:Element, index:number) {
-    const item:ProductProps = this.state.productList[index]
-    return (<ProductItem title={item.title} thumb={item.thumb} price={item.price} sales={item.sales} unit={item.unit} _id={item._id}/>)
+    const item = this.props.products.list[index]
+    return (<ProductItem {...item}  />)
   }
   componentDidMount () {
-    console.log('mount')
+    // const hei = this.state.height - (ReactDOM.findDOMNode((this.ptr as PullToRefresh)) as HTMLElement).offsetTop
+    // setTimeout(() => this.setState({
+    //   height: hei
+    // }), 0)
     this.props.fetchProducts()
+  }
+  handelOnFresh () {
+    console.log('xxxxxxxxxxxxx')
+    // this.setState({ refreshing: true })
+    // setTimeout(() => {
+    //   this.setState({ refreshing: false })
+    // }, 1000)
+  }
+  getScrollContainer () {
+    return this.ptr 
   }
   render () {
     return (
       <div className="page-with-nav">
-        <Carousel
+        {/* <Carousel
           autoplay={true}
           infinite={true}
         >
@@ -137,7 +104,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               />
             </a>
           ))}
-        </Carousel>
+        </Carousel> */}
         <div className="product-wrap">
             <div className="product-banner">xxxx</div>
             <div className="product-list">
@@ -151,6 +118,36 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               itemStyle={{padding: '10px'}}
             />
             </div>
+            {/* <PullToRefresh
+              damping={60}
+              ref={el => this.ptr  = el}
+              style={{
+                height: this.state.height,
+                overflow: 'auto',
+              }}
+              indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+              direction={this.state.down ? 'down' : 'up'}
+              refreshing={this.state.refreshing}
+              onRefresh={this.handelOnFresh}
+              distanceToRefresh={25}
+              getScrollContainer={this.getScrollContainer}
+
+            > */}
+     
+            <div className="product-list">
+              <Grid 
+              data={this.props.products.list}
+              renderItem={this.handelRenderItem}
+              square={false}
+              columnNum={2}
+              hasLine={false}
+              className="not-square-grid"
+              itemStyle={{padding: '10px'}}
+            />
+            </div>
+       
+            {/* </PullToRefresh> */}
+         
         </div>
         <BottomNav curtPage="home"/>
       </div>

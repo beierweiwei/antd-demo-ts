@@ -1,4 +1,5 @@
 {
+  "typeRoots": ["node_modules/@types", "./src/types"],
   "compilerOptions": {
     "baseUrl": ".",
     "outDir": "build/dist",
