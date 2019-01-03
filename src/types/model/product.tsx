@@ -16,4 +16,6 @@ interface ProductState {
   curtPage: number
   pageSize: number
   list: Product[]
+  isAllLoaded: boolean
+  count: number
 }

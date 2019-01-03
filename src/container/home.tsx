@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import HomePage from '../pages/home'
 import { fetchProducts, requestProducts, OptionQuery } from '../store/actions'
 import { ThunkDispatch } from 'redux-thunk';
+import { fetchAds } from 'src/store/reducers/ads';
 const mapStateToprops = ({products}:StoreState) => {
     return {
       products   
@@ -10,6 +11,7 @@ const mapStateToprops = ({products}:StoreState) => {
 const mapDispatchToProps = (dispatch:ThunkDispatch<any, any, any>) => {
     return {
         fetchProducts: (query:OptionQuery) => dispatch(fetchProducts(query)),
+        fetchAds:() => dispatch(fetchAds),
         requestProducts: (query:OptionQuery) => dispatch(requestProducts(query))
     }
 }

@@ -1,7 +1,6 @@
 import { Grid, PullToRefresh } from 'antd-mobile'
 import ProductItem from '../../components/productItem'
 import * as React from 'react'
-// import * as ReactDOM from 'react-dom'
 import BottomNav from '../../components/loayout/bottomNav'
 import './index.less'
 interface HomePageProps {
@@ -20,7 +19,10 @@ interface HomePageState {
   refreshing: boolean
   height: number
   down: boolean
+  // productListGroupByCate: []
+
 }
+
 
 class HomePage extends React.Component<HomePageProps, HomePageState> {
   ptr:PullToRefresh | null
@@ -69,6 +71,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     //   height: hei
     // }), 0)
     this.props.fetchProducts()
+    this.props.fetchAds()
   }
   handelOnFresh () {
     this.props.requestProducts()
