@@ -1,9 +1,30 @@
+@import "../../style/mixins/index.less";
 .product-item {
-  background-color: #ccc;
+  text-align: left;
+  // background-color: #ccc;
   &-img {
+    height: 178px;
+    overflow: hidden;
     img {
-      width: 100%;
-      height: auto;
+      height: 178px;
+      // width: 100%;
     }
+  }
+  &-bottom {
+    padding: 8px 12px; 
+  }
+  &-title {
+    width: 100%;
+    height: 34px;
+    .ellipsis-line(); 
+  }
+  &-sub {
+    .clearfix();
+  }
+  &-sale {
+    float: left;
+  }
+  &-price {
+    float: right;
   }
 }

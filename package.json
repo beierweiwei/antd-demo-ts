@@ -37,7 +37,7 @@
     "typescript": "^3.2.2"
   },
   "browserslist": [
-    "last 1 version",
+    "last 2 version",
     "> 1%",
     "maintained node versions",
     "not dead"

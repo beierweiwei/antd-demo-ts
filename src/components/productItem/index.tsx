@@ -7,7 +7,9 @@ const ProductItem = (props:Product) => {
     <div className={`${prefix}`}>
       <div className={`${prefix}-img`}>
         <img src={props.thumbPic[0]} alt={props.title}/>
-        <div className={`${props.title}`}>
+      </div>
+      <div className={`${prefix}-bottom`}>
+        <div className={`${prefix}-title`}>
           {props.title}
         </div>
         <div className={`${prefix}-sub`}>
