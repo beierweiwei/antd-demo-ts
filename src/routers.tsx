@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import * as React from 'react'
 import Home from './container/home'
 import User from './pages/user'
-import Cate from './pages/product/cate'
+import Cate from './container/cate'
 import Cart from './pages/cart'
 const AppRouter = () => (
   <Router>

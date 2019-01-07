@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch:ThunkDispatch<any, any, any>) => {
     return {
         fetchProducts: (query:OptionQuery) => dispatch(fetchProducts(query)),
         fetchAds:() => dispatch(fetchAds),
-        requestProducts: (query:OptionQuery) => dispatch(requestProducts(query))
+        requestProducts: (query:OptionQuery) => dispatch(requestProducts(query)),
     }
 }
 const HomePageContainer = connect(mapStateToprops, mapDispatchToProps)(HomePage)

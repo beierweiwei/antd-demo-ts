@@ -1,6 +1,5 @@
-@import "../../style/mixins/index.less";
+@import "../../style/util.less";
 .product-item {
-  text-align: left;
   // background-color: #ccc;
   &-img {
     height: 178px;
@@ -12,19 +11,31 @@
   }
   &-bottom {
     padding: 8px 12px; 
+    text-align: left;
+
   }
   &-title {
     width: 100%;
     height: 34px;
-    .ellipsis-line(); 
+    .ellipsis-line();
+    color: @color-text-paragraph;
   }
   &-sub {
     .clearfix();
   }
-  &-sale {
-    float: left;
+  &-sales {
+    float: right;
+    color: @color-text-caption;
+    font-size: @font-size-caption-sm;
+    vertical-align: middle;
   }
   &-price {
-    float: right;
+    float: left;
+    color: @brand-error;
+    font-size: @font-size-caption;
+    vertical-align: middle;
+    &-icon {
+      font-size: @font-size-icontext;
+    }
   }
 }

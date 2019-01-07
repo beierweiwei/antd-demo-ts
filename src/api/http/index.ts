@@ -13,6 +13,7 @@ const Http = axios.create({ ...config, ...api})
 
 export const HandleResponse = (res:any) => {
   if (res.data.code === 200) {
+    console.log(res.data.data)
     return res.data.data
   } else {
     switch (res.data.code) {
@@ -32,7 +33,6 @@ export const handleError = (res:any) => {
 }
 
 Http.interceptors.request.use( (rconfig:any) =>{
-  console.log('---------------------------', rconfig)
   return rconfig 
 })
 /* disable no-unused-vars */

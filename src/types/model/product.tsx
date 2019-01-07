@@ -19,3 +19,17 @@ interface ProductState {
   isAllLoaded: boolean
   count: number
 }
+
+interface ProductCateState {
+  data: ProductCate[]
+}
+
+interface ProductCate {
+  _id: string 
+  level: number
+  name: string 
+  pid: string | null
+  sort: number 
+  field: string 
+  props: any[]
+}

@@ -13,8 +13,8 @@ const ProductItem = (props:Product) => {
           {props.title}
         </div>
         <div className={`${prefix}-sub`}>
+          <span className={`${prefix}-price`}><span className={`${prefix}-price-icon`}>¥</span><span className={`${prefix}-price-num`}>{props.price}</span></span>
           <span className={`${prefix}-sales`}>销量：{props.saleNum}</span>
-          <span className={`${prefix}-price`}>价格：<span className={`${prefix}-price-num`}>{props.price}</span></span>
         </div>
       </div>
     </div>

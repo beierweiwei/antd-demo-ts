@@ -10,13 +10,13 @@ interface HomePageState {
   refreshing: boolean
   height: number
   down: boolean
+  catesTree: any[]
 }
-
-
-class HomePage extends React.Component<HomePageProps, HomePageState> {
+class CatePage extends React.Component<HomePageProps, HomePageState> {
   constructor(props: HomePageProps) {
     super(props)
     this.state = {
+      catesTree: [],
       // 下拉刷新参数
       refreshing: false,
       down: false,
@@ -24,9 +24,34 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
       imgHeight: 'auto'
     }
   }
+  createCateTree (cateList:any) {
+    const res:any  = []
+    cateList.forEach((cate:any) => {
+      findParent(cate, cateList)  
+    })
+    return res 
 
+    function findParent (cate:any, allCate:any) {
+      const pCate = allCate.find((item:any) => item._id === cate.pid)
+      if (!pCate) {
+        if (!res.find((item:any) => item._id === cate._id)) {
+          res.push(cate)
+        }
+      } else {
+        const pCateRes = findParent(pCate, allCate)
+        pCateRes.children = pCateRes.pCateRes || []
+        if (!pCateRes.children.some((child:any) => child._id === cate._id )) {
+          pCateRes.children.push(cate)
+        }
+      }
+      return cate 
+    }
+  }
   componentDidMount() {
-    // this.props.fetchProducts()
+    this.props.fetchProductCates().then((res:any) => {
+      const tree:any = this.createCateTree(res.data.data)
+      this.setState({ ...this.state, catesTree: tree})
+    })
     // this.props.fetchAds()
   }
   render() {
@@ -49,4 +74,4 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     )
   }
 }
-export default HomePage
+export default CatePage

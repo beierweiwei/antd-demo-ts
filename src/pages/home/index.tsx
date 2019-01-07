@@ -50,6 +50,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     setTimeout(() => this.props.fetchProducts())
   }
   render () {
+    const prefix = "home"
     console.log(this.props.ads, 'ads')
     return (
       <div className="page-with-nav">
@@ -59,9 +60,9 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         >
           {this.props.ads.list.map(activity => (
             <a
+              className={`${prefix}-activity-link`}
               key={activity._id}
               href={`/product/list?activityId=${activity._id}`}
-              style={{display: 'inline-block', width: '100%', height: this.state.imgHeight}}
             >
               <img
                 src={activity.thumb}
