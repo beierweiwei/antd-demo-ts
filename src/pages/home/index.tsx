@@ -7,20 +7,12 @@ interface HomePageProps {
   [index:string]:any
   ads: ActivitiesState
 }
-// interface ActivitiesProps {
-//   title: string,
-//   url: string,
-//   thumb: string,
-//   _id: string
-// }
 interface HomePageState {
-  imgHeight: string,
+  imgHeight: string
   productList: Product[]
   refreshing: boolean
   height: number
   down: boolean
-  // productListGroupByCate: []
-
 }
 
 
@@ -85,17 +77,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         </Carousel>
         <div className="product-wrap">
             <div className="product-banner">xxxx</div>
-            <div className="product-list">
-             <Grid 
-              data={this.state.productList}
-              renderItem={this.handelRenderItem}
-              square={false}
-              columnNum={2}
-              hasLine={false}
-              className="not-square-grid"
-              itemStyle={{padding: '10px'}}
-            />
-            </div>
             <PullToRefresh
               damping={60}
               ref={el => this.ptr  = el}
@@ -118,7 +99,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               columnNum={2}
               hasLine={false}
               className="not-square-grid"
-              itemStyle={{padding: '10px'}}
+              itemStyle={{padding: '5px'}}
             />
             </div>
             </PullToRefresh>
