@@ -14,13 +14,13 @@ action:ProductAction)
 {
   switch (action.type) {
     case actions.REQUEST_PRODUCTS:
-      if (state.isAllLoaded) {
+      // 下拉加载会促发多次request，根据isLoading来判断是否更新请求参数
+      if (state.isAllLoaded || state.isLoading) {
         return state
       } else {
-        const query = action.query || {}
+        const query = action.query || {} 
         const curtPage = query.curtPage || state.curtPage + 1
         const pageSize = query.pageSize || state.pageSize
-        
         return {
           ...state,
           isLoading: true,

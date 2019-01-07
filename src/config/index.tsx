@@ -1,5 +1,4 @@
+import baseConfig from './base'
 export default {
-  API: {
-    BASE_URL: '/'
-  }
+  ...baseConfig,
 }

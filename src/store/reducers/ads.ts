@@ -2,7 +2,7 @@ import { actions } from '../../constants'
 // import { AsyncAction } from '../actions'
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
-import axios from 'axios'
+import { Http } from '../../api/index'
 
 interface ReceiveAds extends Action<actions.RECEIVE_ADS> {
   data: ActivitiesState
@@ -10,16 +10,16 @@ interface ReceiveAds extends Action<actions.RECEIVE_ADS> {
 
 // Actions
 export const fetchAds: ThunkAction<any, any, any, any> = (disPatch, getSate) => {
-  axios.get('http://localhost:8080/api/activity', {params: {pageSize: 4, curtPage: 1}})
+  Http.get('/activity', {params: {pageSize: 4, curtPage: 1}})
     .then(
-      res => res.data.data,
+      (res:any) => disPatch(receiveAds(res)),
       err => console.log(err.message)
     ).then(
-      res => disPatch(receiveAds(res))
+      
     )
 }
 
-const receiveAds = (data: ActivitiesState): ReceiveAds => {
+const receiveAds = (data: ActivitiesState = {list: [], count: 0}): ReceiveAds => {
   return {
     type: actions.RECEIVE_ADS,
     data 
@@ -30,7 +30,7 @@ const receiveAds = (data: ActivitiesState): ReceiveAds => {
 // type AdsReducer = (ActivitiesState, any) => ActivitiesState
 export default function ads(state: ActivitiesState = 
   {
-    count: 3,
+    count: 0,
     list: []
   },
   action: ReceiveAds) {
@@ -39,7 +39,8 @@ export default function ads(state: ActivitiesState =
     const res = action.data
       return {
         ...state,
-        list: res.list 
+        list: res.list,
+        count: res.count
       }
     default:
       return state

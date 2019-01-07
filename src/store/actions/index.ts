@@ -1,9 +1,9 @@
 import { actions } from '../../constants'
-import axios, { AxiosRequestConfig } from 'axios'
 // import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
+import { Http } from '../../api'
 // import { Dispatch } from 'react';
-export interface RequestQuery extends AxiosRequestConfig {
+export interface RequestQuery  {
   pageSize?: number
   curtPage?: number
   filter?: any
@@ -44,44 +44,20 @@ function receiveProducts(data:ProductListApi): ReceiveProductsAction{
   }
 }
 
-export const fetchProducts: AsyncAction<Promise<ProductAction>, StoreState, OptionQuery, RequestProductAction> = (query) => {
+export const fetchProducts: AsyncAction<any, StoreState, OptionQuery, RequestProductAction> = (query) => {
   return  (dispatch, getState) => {
-    const state = getState()
-    query = query || {}
-    query.pageSize = state.products.pageSize 
-    query.curtPage = state.products.curtPage
     dispatch(requestProducts(query))
-    
-    return axios.get('http://localhost:8080/api/product/list', {params: query})
+    const state = getState()
+    const tempQuery:any = {}
+    tempQuery.pageSize = state.products.pageSize
+    tempQuery.curtPage = state.products.curtPage
+    return Http.get('product/list', { params: tempQuery})
       .then(
-        res => {
-          return res.data.data
+        (res:any) => {
+          dispatch(receiveProducts(res))
+          return res
         },
         err => console.log(err.message)
-      )
-      .then(res =>
-        dispatch(receiveProducts(res))
-      )  
+      ) 
   }
 }
-
-// export const fetchProducts:AsyncAction<OptionQuery, ProductAction> = (query) => {
-//   return  (dispatch, getState) => {
-//     const state:StoreState = getState()
-//     query = query || {}
-//     query.pageSize = state.products.pageSize 
-//     query.curtPage = state.products.curtPage
-//     dispatch(requestProducts(query))
-    
-//     return axios.get('http://localhost:8080/api/product/list', {params: query})
-//       .then(
-//         res => {
-//           return res.data.data
-//         },
-//         err => console.log(err.message)
-//       )
-//       .then(res =>
-//         dispatch(receiveProducts(res))
-//       )
-//   }
-// }

@@ -1,20 +1,20 @@
-import { Grid, PullToRefresh } from 'antd-mobile'
+import { Grid, PullToRefresh, Carousel } from 'antd-mobile'
 import ProductItem from '../../components/productItem'
 import * as React from 'react'
 import BottomNav from '../../components/loayout/bottomNav'
 import './index.less'
 interface HomePageProps {
   [index:string]:any
+  ads: ActivitiesState
 }
-interface ActivitiesProps {
-  title: string,
-  url: string,
-  thumb: string,
-  _id: string
-}
+// interface ActivitiesProps {
+//   title: string,
+//   url: string,
+//   thumb: string,
+//   _id: string
+// }
 interface HomePageState {
   imgHeight: string,
-  activities: ActivitiesProps[]
   productList: Product[]
   refreshing: boolean
   height: number
@@ -34,26 +34,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
       down: false,
       height: (document.documentElement as HTMLElement).clientHeight,
       imgHeight: 'auto',
-      activities: [
-        {
-          title: 'xxxx',
-          url: 'http://moco.com',
-          thumb: '/static/imgs/test.jpg',
-          _id: 'xxxxxxxxxxxxx'
-        },
-        {
-          title: 'xxxx',
-          url: 'http://moco.com',
-          thumb: '/static/imgs/test.jpg',
-          _id: 'xxxxxxxxxxxxx'
-        },
-        {
-          title: 'xxxx',
-          url: 'http://moco.com',
-          thumb: '/static/imgs/test.jpg',
-          _id: 'xxxxxxxxxxxxx'
-        }
-      ],
       productList: []
     }
     this.handelRenderItem = this.handelRenderItem.bind(this)
@@ -78,16 +58,17 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     setTimeout(() => this.props.fetchProducts())
   }
   render () {
+    console.log(this.props.ads, 'ads')
     return (
       <div className="page-with-nav">
-        {/* <Carousel
+        <Carousel
           autoplay={true}
           infinite={true}
         >
-          {this.state.activities.map(activity => (
+          {this.props.ads.list.map(activity => (
             <a
               key={activity._id}
-              href={activity.url}
+              href={`/product/list?activityId=${activity._id}`}
               style={{display: 'inline-block', width: '100%', height: this.state.imgHeight}}
             >
               <img
@@ -101,7 +82,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               />
             </a>
           ))}
-        </Carousel> */}
+        </Carousel>
         <div className="product-wrap">
             <div className="product-banner">xxxx</div>
             <div className="product-list">
