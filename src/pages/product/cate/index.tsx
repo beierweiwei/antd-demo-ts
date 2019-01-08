@@ -1,58 +1,37 @@
 import { Flex } from 'antd-mobile'
 import * as React from 'react'
 import BottomNav from '../../../components/loayout/bottomNav'
+import { createCateTree } from '../../../utils'
+
 import './index.less'
-interface HomePageProps {
+interface CatePageProps {
   [index: string]: any
 }
-interface HomePageState {
-  imgHeight: string,
-  refreshing: boolean
-  height: number
-  down: boolean
+interface CatePageState {
   catesTree: any[]
+  curtCate: string 
 }
-class CatePage extends React.Component<HomePageProps, HomePageState> {
-  constructor(props: HomePageProps) {
+class CatePage extends React.Component<CatePageProps, CatePageState> {
+  constructor(props: CatePageProps) {
     super(props)
     this.state = {
+      curtCate: '',
       catesTree: [],
-      // 下拉刷新参数
-      refreshing: false,
-      down: false,
-      height: (document.documentElement as HTMLElement).clientHeight,
-      imgHeight: 'auto'
     }
   }
-  createCateTree (cateList:any) {
-    const res:any  = []
-    cateList.forEach((cate:any) => {
-      findParent(cate, cateList)  
-    })
-    return res 
 
-    function findParent (cate:any, allCate:any) {
-      const pCate = allCate.find((item:any) => item._id === cate.pid)
-      if (!pCate) {
-        if (!res.find((item:any) => item._id === cate._id)) {
-          res.push(cate)
-        }
-      } else {
-        const pCateRes = findParent(pCate, allCate)
-        pCateRes.children = pCateRes.pCateRes || []
-        if (!pCateRes.children.some((child:any) => child._id === cate._id )) {
-          pCateRes.children.push(cate)
-        }
-      }
-      return cate 
-    }
-  }
   componentDidMount() {
     this.props.fetchProductCates().then((res:any) => {
-      const tree:any = this.createCateTree(res.data.data)
+      const tree = createCateTree(res.data.data)
       this.setState({ ...this.state, catesTree: tree})
     })
     // this.props.fetchAds()
+  }
+  handleTopCateClick (id: string) {
+    this.setState({
+      ...this.state,
+      curtCate: id
+    })
   }
   render() {
     const prefix = 'product-cate'
@@ -61,7 +40,15 @@ class CatePage extends React.Component<HomePageProps, HomePageState> {
         <div className={prefix} >
           <Flex style={{ height: '100%'}}> 
             <div className={`${prefix}-left`}>
-              left
+              {this.state.catesTree.map((topCate) => (
+                <div 
+                  className={(this.state.curtCate === topCate._id ? 'active ' : '') + `${prefix}-top-level`}
+                  onClick={(e) => this.handleTopCateClick(topCate._id)}
+                  key={topCate._id}
+                >
+                  {topCate.name}
+                </div>
+              ))}
             </div>
         
             <div className={`${prefix}-right`}>
