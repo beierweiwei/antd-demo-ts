@@ -1,16 +1,23 @@
+@import "./../../../style/util/index.less";
 @prefix:bottom-nav-;
 .bottom-nav {
   &-container {
     position: fixed;
     width: 100%;
-    padding-top: 8px;
+    height: px2rem(50);
+    padding-top: px2rem(8);
     bottom: 0;
     left: 0;
     z-index: 999;
     background-color: #fff;
-    font-size: 12px;
+    .font2px(12);
     &-content {
       text-align: center;
+    }
+  }
+  &-item {
+    &-icon {
+      height: px2rem(22);
     }
   }
   &-title {

@@ -29,6 +29,7 @@
     "webpack",
     "jest",
     "src/setupTests.ts",
-    "src/style/iconfont"
+    "src/style/iconfont",
+    "config-overrides.js"
   ]
 }

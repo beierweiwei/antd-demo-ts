@@ -82,8 +82,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               damping={60}
               ref={el => this.ptr  = el}
               style={{
-                height: this.state.height,
-                overflow: 'auto',
               }}
               indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
               direction={this.state.down ? 'down' : 'up'}
@@ -99,8 +97,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
               square={false}
               columnNum={2}
               hasLine={false}
-              className="not-square-grid"
-              itemStyle={{padding: '5px'}}
+              className="not-square-grid product-grid"
             />
             </div>
             </PullToRefresh>

@@ -2,20 +2,23 @@ import { Flex } from 'antd-mobile'
 import * as React from 'react'
 import BottomNav from '../../../components/loayout/bottomNav'
 import { createCateTree } from '../../../utils'
-
+import classnames from 'classnames'
 import './index.less'
 interface CatePageProps {
   [index: string]: any
 }
 interface CatePageState {
   catesTree: any[]
-  curtCate: string 
+  curtCateId: string 
 }
 class CatePage extends React.Component<CatePageProps, CatePageState> {
+  static defaultProps: {
+
+  }
   constructor(props: CatePageProps) {
     super(props)
     this.state = {
-      curtCate: '',
+      curtCateId: '',
       catesTree: [],
     }
   }
@@ -23,18 +26,21 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
   componentDidMount() {
     this.props.fetchProductCates().then((res:any) => {
       const tree = createCateTree(res.data.data)
-      this.setState({ ...this.state, catesTree: tree})
+      this.setState({ ...this.state, catesTree: tree, curtCateId: tree && tree[0] && tree[0]._id})
     })
     // this.props.fetchAds()
   }
   handleTopCateClick (id: string) {
     this.setState({
       ...this.state,
-      curtCate: id
+      curtCateId: id
     })
   }
   render() {
     const prefix = 'product-cate'
+    const { catesTree, curtCateId } = this.state
+    const curtCate = catesTree.find(cate => cate._id === curtCateId)
+    
     return (
       <div className="page-with-nav page">
         <div className={prefix} >
@@ -42,7 +48,8 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
             <div className={`${prefix}-left`}>
               {this.state.catesTree.map((topCate) => (
                 <div 
-                  className={(this.state.curtCate === topCate._id ? 'active ' : '') + `${prefix}-top-level`}
+                  // className={(this.state.curtCateId === topCate._id ? 'active ' : '') + `${prefix}-top-level`}
+                  className={classnames({ active: this.state.curtCateId === topCate._id }, `${prefix}-top-level`)}
                   onClick={(e) => this.handleTopCateClick(topCate._id)}
                   key={topCate._id}
                 >
@@ -52,7 +59,22 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
             </div>
         
             <div className={`${prefix}-right`}>
-              righ
+                {
+                curtCate && curtCate.children && curtCate.children.map(
+                  (secondCate:any) => {
+                    return (
+                      <div key={secondCate._id}>
+                        <div >{secondCate.name}</div>
+                        {secondCate.children && secondCate.children.map((thirdCate:any) => {
+                          return (<span key={thirdCate._id}>
+                            {thirdCate.name}
+                          </span>)
+                        })}
+                      </div>
+                    )
+                  }
+                )
+                }
             </div>
           </Flex>
         </div>

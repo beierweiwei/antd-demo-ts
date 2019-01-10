@@ -11,10 +11,10 @@ const bottomNav = (props:NavProps) => {
   return (
     <div className={`${prefix}container`}>
       <Flex className={`${prefix}container-content`}>
-        <Flex.Item className={curtPage === 'home' ? 'active' : ''}><Link to="/"><div><i className="iconfont icon-home"/><div>首页</div></div></Link></Flex.Item>
-        <Flex.Item className={curtPage === 'cate' ? 'active' : ''}><Link to="/cate"><div><i className="iconfont icon-fenlei" /></div><span>分类</span></Link></Flex.Item>
-        <Flex.Item className={curtPage === 'cart' ? 'active' : ''}><Link to="/cart"><div><i className="iconfont icon-cart" /></div><span>购物车</span></Link></Flex.Item>
-        <Flex.Item className={curtPage === 'user' ? 'active' : ''}><Link to="/user"><div><i className="iconfont icon-user" /></div><span>我的</span></Link></Flex.Item>
+        <Flex.Item className={curtPage === 'home' ? 'active' : ''}><Link to="/"><div className={`${prefix}item-icon`}><i className="iconfont icon-home" /></div><div>首页</div></Link></Flex.Item>
+        <Flex.Item className={curtPage === 'cate' ? 'active' : ''}><Link to="/cate"><div className={`${prefix}item-icon`}><i className="iconfont icon-fenlei" /></div><div>分类</div></Link></Flex.Item>
+        <Flex.Item className={curtPage === 'cart' ? 'active' : ''}><Link to="/cart"><div className={`${prefix}item-icon`}><i className="iconfont icon-cart" /></div><div>购物车</div></Link></Flex.Item>
+        <Flex.Item className={curtPage === 'user' ? 'active' : ''}><Link to="/user"><div className={`${prefix}item-icon`}><i className="iconfont icon-user" /></div><div>我的</div></Link></Flex.Item>
       </Flex>
     </div>
   )
