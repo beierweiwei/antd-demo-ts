@@ -78,7 +78,7 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
             </div>
           </Flex>
         </div>
-        <BottomNav curtPage="home" />
+        <BottomNav curtPage="cate" />
       </div>
     )
   }

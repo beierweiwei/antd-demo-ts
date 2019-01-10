@@ -1,6 +1,6 @@
 @import "./../../../style/util/index.less";
-@prefix:bottom-nav-;
-.bottom-nav {
+@prefix:bottom-nav;
+.@{prefix}{
   &-container {
     position: fixed;
     width: 100%;
@@ -11,11 +11,16 @@
     z-index: 999;
     background-color: #fff;
     .font2px(12);
-    &-content {
-      text-align: center;
-    }
+    text-align: center;
+ 
   }
   &-item {
+    &.active {
+      color: #f60;
+      a {
+        color: #f60;
+      }
+    }
     &-icon {
       height: px2rem(22);
     }
