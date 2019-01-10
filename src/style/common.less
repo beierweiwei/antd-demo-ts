@@ -1,9 +1,9 @@
-@import "./util.less";
+@import "./util/index.less";
 body {
-  background-color: @fill-base;
+  background-color: @fill-body;
   color: @color-text-paragraph;
-  font-size: @font-size-base;
-  line-height: 1.2;
+  .font2px(@font-size-base);
+  line-height: @line-height-base;
 }
 html, body, .page, #root, .App, .router-container {
   height: 100%;
@@ -15,7 +15,7 @@ html, body, .page, #root, .App, .router-container {
 }
 .page-with-nav {
   position: relative;
-  padding-bottom: 50px;
+  padding-bottom: px2rem(50);
 }
 .page {
   

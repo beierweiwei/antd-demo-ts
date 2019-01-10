@@ -1,0 +1,27 @@
+@import "../variable.less";
+// 以两倍设计稿为基础 
+.px2px( @px, @name:font-size){
+    @{name}: round(@px / @designDpr) * 1px;
+    [data-dpr="2"] & {
+        @{name}: round(@px * 2 / @designDpr) * 1px;
+    }
+    // for mx3
+    [data-dpr="2.5"] & {
+        @{name}: round(@px * 2.5 / @designDpr) * 1px;
+    }
+    // for 小米note
+    [data-dpr="2.75"] & {
+        @{name}: round(@px * 2.75 / @designDpr) * 1px;
+    }
+    [data-dpr="3"] & {
+        @{name}: round(@px * 3 / @designDpr) * 1px
+    }
+    // for 三星note4
+    [data-dpr="4"] & {
+        @{name}: round(@px * 4 / @designDpr) * 1px;
+    }
+}
+
+.font2px (@px) {
+    .px2px(@px);
+}

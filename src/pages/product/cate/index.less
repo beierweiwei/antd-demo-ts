@@ -1,13 +1,11 @@
-@import "./../../../style/util.less";
+@import "./../../../style/util/index.less";
 .product-cate {
   height: 100%;
   &-left {
-    flex: 0 0 85px;
-    width: 85px;
+    flex: 0 0 px2rem(85);
+    width: px2rem(85);
     height: 100%;
     overflow-y: auto;
-    background-color: bisque;
-
   }
   &-right {
     flex: 1;
@@ -16,10 +14,12 @@
     background-color: aquamarine;
   }
   &-top-level {
-    height: 48px;
-    line-height: 48px;
-    font-size: 12px;
-    background:@fill-grey;
+    height: px2rem(48);
+    line-height: px2rem(48);
+    .font2px(12);
     text-align: center;
+    &.active {
+      background: @fill-base;
+    }
   }
 }
