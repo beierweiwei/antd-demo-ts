@@ -2,6 +2,7 @@ const tsImportPluginFactory = require('ts-import-plugin')
 const rewireLess = require('react-app-rewire-less');
 const { getLoader } = require("react-app-rewired");
 const LessFunc = require("less-plugin-functions");
+const theme = require('./package.json').theme;
 module.exports = function override(config, env) {
   // do stuff with the webpack config...
   const tsLoader = getLoader(
@@ -25,7 +26,7 @@ module.exports = function override(config, env) {
     javascriptEnabled: true,
     // LESS 使用自定义函数
     plugins: [new LessFunc()],
-    modifyVars: { "@primary-color": "#1DA57A" },
+    modifyVars: { ...theme},
   })(config, env);
   return config;
 };

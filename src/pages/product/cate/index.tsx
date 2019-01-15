@@ -1,4 +1,4 @@
-import { Flex } from 'antd-mobile'
+import { Flex, Button } from 'antd-mobile'
 import * as React from 'react'
 import BottomNav from '../../../components/loayout/bottomNav'
 import { createCateTree } from '../../../utils'
@@ -25,6 +25,7 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
 
   componentDidMount() {
     this.props.fetchProductCates().then((res:any) => {
+      console.log(res)
       const tree = createCateTree(res.data.data)
       this.setState({ ...this.state, catesTree: tree, curtCateId: tree && tree[0] && tree[0]._id})
     })
@@ -63,12 +64,21 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
                 curtCate && curtCate.children && curtCate.children.map(
                   (secondCate:any) => {
                     return (
-                      <div key={secondCate._id}>
-                        <div >{secondCate.name}</div>
+                      <div
+                        className={`${prefix}-second`}
+                        key={secondCate._id}
+                        >
+                        <div className={`${prefix}-second-item`}>{secondCate.name}</div>
                         {secondCate.children && secondCate.children.map((thirdCate:any) => {
-                          return (<span key={thirdCate._id}>
+                          return (
+                            <Button
+                              className={`${prefix}-third`}
+                              inline={true} 
+                              size="small" 
+                              key={thirdCate._id}
+                            >
                             {thirdCate.name}
-                          </span>)
+                          </Button>)
                         })}
                       </div>
                     )

@@ -10,8 +10,10 @@
   &-right {
     flex: 1;
     height: 100%;
+    padding: px2rem(10) px2rem(12);
     overflow-y: auto;
-    background-color: aquamarine;
+    background-color: @fill-base;
+    overflow: hidden;
   }
   &-top-level {
     height: px2rem(48);
@@ -22,4 +24,14 @@
       background: @fill-base;
     }
   }
+  &-second {
+    margin-right: -1 * px2rem(12);
+    &-item {
+      padding: px2rem(10) 0;
+      font-size: @font-size-heading;
+    }    
+  }
+  &-third {
+    margin: 0 px2rem(8) px2rem(8) 0;
+  }  
 }
