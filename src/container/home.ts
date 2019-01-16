@@ -5,13 +5,13 @@ import { ThunkDispatch } from 'redux-thunk';
 import { fetchAds } from 'src/store/reducers/ads';
 const mapStateToprops = ({home}:StoreState) => {
     return {
-      home
+      ...home
     }
 }
 const mapDispatchToProps = (dispatch:ThunkDispatch<any, any, any>) => {
     return {
         fetchProducts: (query:OptionQuery) => dispatch(fetchProducts(query, 'home')),
-        fetchAds:() => (query:any) => dispatch(fetchAds(query, 'home')),
+        fetchAds:() => (query:any={}) => dispatch(fetchAds(query, 'home')),
         requestProducts: (query:OptionQuery) => dispatch(requestProducts(query, 'home')),
     }
 }

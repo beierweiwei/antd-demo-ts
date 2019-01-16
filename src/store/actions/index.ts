@@ -36,6 +36,7 @@ export function requestProducts (query: OptionQuery, page?:string):RequestProduc
   return {
     type: actions.REQUEST_PRODUCTS,
     query,
+    page
   }
 }
 
@@ -43,6 +44,7 @@ export function receiveProducts(data:ProductListApi, page?:string): ReceiveProdu
   return {
     type: actions.RECEIVE_PRODUCTS,
     data,
+    page
   }
 }
 
@@ -56,6 +58,7 @@ export const fetchProducts: AsyncAction<any, StoreState, OptionQuery, RequestPro
     return Http.get('product/list', { params: tempQuery})
       .then(
         (res:any) => {
+          console.log('xxxxx')
           dispatch(receiveProducts(res, page))
         },
         err => console.log(err.message)

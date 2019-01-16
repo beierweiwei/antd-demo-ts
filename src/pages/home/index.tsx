@@ -41,6 +41,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     // setTimeout(() => this.setState({
     //   height: hei
     // }), 0)
+    console.log('fetch..................')
     this.props.fetchProducts()
     this.props.fetchAds()
   }
