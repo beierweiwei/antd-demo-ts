@@ -4,25 +4,28 @@ import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { Http } from '../../api/index'
 
-interface ReceiveAds extends Action<actions.RECEIVE_ADS> {
-  data: ActivitiesState
+export interface ReceiveAds extends Action<actions.RECEIVE_ADS> {
+  data: ActivitiesState,
+  page?: any 
 }
 
 // Actions
-export const fetchAds: ThunkAction<any, any, any, any> = (disPatch, getSate) => {
-  Http.get('/activity', {params: {pageSize: 4, curtPage: 1}})
+export const fetchAds = (query:any, page?:string): ThunkAction<any, any, any, any> => { 
+  return (disPatch, getSate) => {
+  Http.get('/activity', {params: query})
     .then(
-      (res:any) => disPatch(receiveAds(res)),
+      (res:any) => {
+        disPatch(receiveAds(res, page))
+      },
       err => console.log(err.message)
-    ).then(
-      
     )
+  } 
 }
 
-const receiveAds = (data: ActivitiesState = {list: [], count: 0}): ReceiveAds => {
+export const receiveAds = (data = {list: [], count: 0}, page = ''): ReceiveAds => {
   return {
     type: actions.RECEIVE_ADS,
-    data 
+    data
   }
 }
 // reducers 

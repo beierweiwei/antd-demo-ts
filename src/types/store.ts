@@ -1,5 +1,4 @@
 interface StoreState {
-  products: ProductState
-  ads: ActivitiesState
   productCates: ProductCateState
+  home: HomeState
 }

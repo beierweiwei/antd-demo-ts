@@ -2,8 +2,7 @@ import thunkMiddleware from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 import rooterReducer from './reducers'
 // import { StoreState } from '../types'
-import { ProductAction } from './actions'
-const store = createStore<StoreState, ProductAction, any, any >(
+const store = createStore<StoreState, any, any, any >(
   rooterReducer,
   applyMiddleware(
     thunkMiddleware

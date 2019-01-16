@@ -3,17 +3,16 @@ import HomePage from '../pages/home'
 import { fetchProducts, requestProducts, OptionQuery } from '../store/actions'
 import { ThunkDispatch } from 'redux-thunk';
 import { fetchAds } from 'src/store/reducers/ads';
-const mapStateToprops = ({products, ads}:StoreState) => {
+const mapStateToprops = ({home}:StoreState) => {
     return {
-      products,
-      ads  
+      home
     }
 }
 const mapDispatchToProps = (dispatch:ThunkDispatch<any, any, any>) => {
     return {
-        fetchProducts: (query:OptionQuery) => dispatch(fetchProducts(query)),
-        fetchAds:() => dispatch(fetchAds),
-        requestProducts: (query:OptionQuery) => dispatch(requestProducts(query)),
+        fetchProducts: (query:OptionQuery) => dispatch(fetchProducts(query, 'home')),
+        fetchAds:() => (query:any) => dispatch(fetchAds(query, 'home')),
+        requestProducts: (query:OptionQuery) => dispatch(requestProducts(query, 'home')),
     }
 }
 const HomePageContainer = connect(mapStateToprops, mapDispatchToProps)(HomePage)

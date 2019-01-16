@@ -15,7 +15,6 @@ interface HomePageState {
   down: boolean
 }
 
-
 class HomePage extends React.Component<HomePageProps, HomePageState> {
   ptr:PullToRefresh | null
   constructor (props:HomePageProps) {
