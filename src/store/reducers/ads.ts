@@ -37,6 +37,7 @@ export default function ads(state: ActivitiesState =
     list: []
   },
   action: ReceiveAds) {
+  console.log(action)
   switch (action.type) {
     case actions.RECEIVE_ADS:
     const res = action.data
