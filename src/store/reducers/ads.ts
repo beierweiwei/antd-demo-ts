@@ -6,11 +6,11 @@ import { Http } from '../../api/index'
 
 export interface ReceiveAds extends Action<actions.RECEIVE_ADS> {
   data: ActivitiesState,
-  page?: any 
+  page?: string 
 }
 
 // Actions
-export const fetchAds = (query:any, page?:string): ThunkAction<any, any, any, any> => { 
+export const fetchAds = (query: any, page?: string): (ThunkAction<any, any, any, any>)  => { 
   return (disPatch, getSate) => {
   Http.get('/activity', {params: query})
     .then(
@@ -25,19 +25,18 @@ export const fetchAds = (query:any, page?:string): ThunkAction<any, any, any, an
 export const receiveAds = (data = {list: [], count: 0}, page = ''): ReceiveAds => {
   return {
     type: actions.RECEIVE_ADS,
-    data
+    data,
+    page
   }
 }
 // reducers 
 
-// type AdsReducer = (ActivitiesState, any) => ActivitiesState
 export default function ads(state: ActivitiesState = 
   {
     count: 0,
     list: []
   },
   action: ReceiveAds) {
-  console.log(action)
   switch (action.type) {
     case actions.RECEIVE_ADS:
     const res = action.data

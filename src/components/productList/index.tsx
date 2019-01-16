@@ -1,5 +1,5 @@
 import * as React from 'react'
-import 'index.less'
+import './index.less'
 import ProductItem from './../productItem'
 import { PullToRefresh, Grid } from 'antd-mobile';
 interface ProductListProps {
@@ -15,8 +15,6 @@ interface ProductListProps {
   curtPage?: number
   isLoading?: boolean
   fetchProducts: any 
-  fetchAds: any
-  requestProducts: any 
 }
 
 interface ProductListState {
@@ -51,17 +49,15 @@ class ProductList extends React.Component<ProductListProps, ProductListState> {
     //   height: hei
     // }), 0)
     this.props.fetchProducts()
-    this.props.fetchAds()
   }
   handelOnFresh() {
-    this.props.requestProducts()
     setTimeout(() => this.props.fetchProducts())
   }
   render () {
-    const prefix = 'product-list'
+    const prefix = 'c-product-list'
     const bannerData = this.props.bannerData 
     return (
-      <div className="page-with-nav">
+      <div className={prefix}>
         {bannerData && (
           <a
             className={`${prefix}-activity-link`}

@@ -58,7 +58,6 @@ export const fetchProducts: AsyncAction<any, StoreState, OptionQuery, RequestPro
     return Http.get('product/list', { params: tempQuery})
       .then(
         (res:any) => {
-          console.log('xxxxx')
           dispatch(receiveProducts(res, page))
         },
         err => console.log(err.message)
