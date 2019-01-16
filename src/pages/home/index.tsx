@@ -51,7 +51,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         </Carousel>
         <div className="product-wrap">
             <div className="product-banner">xxxx</div>
-          <ProductList {...this.props.products} fetchProducts={this.props.fetchProducts}/>
+          <ProductList products={this.props.products} fetchProducts={this.props.fetchProducts}/>
         </div>
         <BottomNav curtPage="home"/>
       </div>

@@ -2,18 +2,7 @@ import * as React from 'react'
 import './index.less'
 import ProductItem from './../productItem'
 import { PullToRefresh, Grid } from 'antd-mobile';
-interface ProductListProps {
-  bannerData?: {
-    title?: string 
-    thumb?: string
-    link?: string
-    desc?: string
-    _id?: string 
-  }
-  list: Product[]
-  pageSize?: number
-  curtPage?: number
-  isLoading?: boolean
+interface ProductListProps extends ProductListPage {
   fetchProducts: any 
 }
 
@@ -40,7 +29,7 @@ class ProductList extends React.Component<ProductListProps, ProductListState> {
     this.handelOnFresh = this.handelOnFresh.bind(this)
   }
   handelRenderItem(el: Element, index: number) {
-    const item = this.props.list[index]
+    const item = this.props.products.list[index]
     return (<ProductItem {...item} />)
   }
   componentDidMount() {
@@ -83,14 +72,14 @@ class ProductList extends React.Component<ProductListProps, ProductListState> {
             }}
             indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
             direction={this.state.down ? 'down' : 'up'}
-            refreshing={this.props.isLoading}
+            refreshing={this.props.products.isLoading}
             onRefresh={this.handelOnFresh}
             distanceToRefresh={25}
 
           >
             <div className="product-list">
               <Grid
-                data={this.props.list}
+                data={this.props.products.list}
                 renderItem={this.handelRenderItem}
                 square={false}
                 columnNum={2}
