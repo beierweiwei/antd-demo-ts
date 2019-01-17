@@ -1,10 +1,10 @@
 import products from './products';
 import { actions } from 'src/constants';
 
-export default function productList (state:ProductListPage = {
+export default function productList (state = {
   products: {
     isLoading: false, 
-    curtPage: 1,
+    curtPage: 0,
     pageSize: 10,
     list: [],
     isAllLoaded: false,

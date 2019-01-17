@@ -1,5 +1,5 @@
 import * as React from 'react'
-// import ProductList from '../../../components/productList'
+import ProductList from '../../../components/productList'
 interface ProudctListPageProps {
   [index:string]: any 
 }
@@ -12,10 +12,15 @@ class ProudctListPage extends React.Component<ProudctListPageProps, ProudctListP
   constructor (props: ProudctListPageProps) {
     super(props)
   }
+  
   render () {
     return (
       <div>
-        {/* <ProductList></ProductList> */}
+        <ProductList 
+          products={this.props.products} 
+          fetchProducts={this.props.fetchProducts}
+          bannerData={this.props.banerData}  
+        />
       </div>
     )
   }
