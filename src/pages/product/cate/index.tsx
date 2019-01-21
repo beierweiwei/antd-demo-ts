@@ -4,6 +4,7 @@ import BottomNav from '../../../components/loayout/bottomNav'
 import { createCateTree } from '../../../utils'
 import classnames from 'classnames'
 import './index.less'
+import { Link } from 'react-router-dom';
 interface CatePageProps {
   [index: string]: any
 }
@@ -71,14 +72,19 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
                         <div className={`${prefix}-second-item`}>{secondCate.name}</div>
                         {secondCate.children && secondCate.children.map((thirdCate:any) => {
                           return (
-                            <Button
-                              className={`${prefix}-third`}
-                              inline={true} 
-                              size="small" 
-                              key={thirdCate._id}
+                            <Link 
+                              to={`/product/list?cate=${thirdCate._id}`}
+                              key={thirdCate._id}  
                             >
-                            {thirdCate.name}
-                          </Button>)
+                                <Button
+                                  className={`${prefix}-third`}
+                                  inline={true} 
+                                  size="small" 
+                                >
+                                {thirdCate.name}
+                              </Button>
+                            </Link>
+                          )
                         })}
                       </div>
                     )
