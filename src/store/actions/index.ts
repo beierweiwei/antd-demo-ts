@@ -1,8 +1,6 @@
 import { actions } from '../../constants'
-// import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
 import { Http } from '../../api'
-// import { Dispatch } from 'react';
 export interface RequestQuery  {
   pageSize?: number
   curtPage?: number
@@ -13,6 +11,7 @@ export interface RequestProductAction {
   type: actions.REQUEST_PRODUCTS
   query?: OptionQuery
   page?: string 
+  clear?: boolean 
 }
 
 
@@ -55,6 +54,7 @@ export const fetchProducts: AsyncAction<any, StoreState, OptionQuery, RequestPro
     const tempQuery:any = {}
     tempQuery.pageSize = state[page].products.pageSize
     tempQuery.curtPage = state[page].products.curtPage
+  
     return Http.get('product/list', { params: tempQuery})
       .then(
         (res:any) => {

@@ -19,7 +19,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
     }
   }
   componentDidMount () {
-    console.log('mmmmmm')
     this.props.fetchAds({pageSize: 5, curtPage: 1})
   }
   render () {

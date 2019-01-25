@@ -4,8 +4,8 @@ import { actions } from 'src/constants';
 export default function productList (state:ProductListPage = {
   products: {
     isLoading: false, 
-    curtPage: 1,
-    pageSize: 10,
+    curtPage: 0,
+    pageSize: 2,
     list: [],
     isAllLoaded: false,
     count: 0
