@@ -32,13 +32,7 @@ class ProductList extends React.Component<ProductListProps, ProductListState> {
     const item = this.props.products.list[index]
     return (<ProductItem {...item} />)
   }
-  componentDidMount() {
-    // const hei = this.state.height - (ReactDOM.findDOMNode((this.ptr as PullToRefresh)) as HTMLElement).offsetTop
-    // setTimeout(() => this.setState({
-    //   height: hei
-    // }), 0)
-    this.props.fetchProducts()
-  }
+
   handelOnFresh() {
     setTimeout(() => this.props.fetchProducts())
   }

@@ -16,13 +16,14 @@ export default function products(state: ProductState = {
         return state
       } else {
         const query = action.query || {}
-        const curtPage = query.curtPage || state.curtPage + 1
+        const curtPage = query.curtPage !== undefined ? query.curtPage : state.curtPage + 1
         const pageSize = query.pageSize || state.pageSize
         return {
           ...state,
           isLoading: true,
           curtPage,
-          pageSize
+          pageSize,
+          list: curtPage < 1 ? [] : state.list
         }
       }
     case actions.RECEIVE_PRODUCTS:

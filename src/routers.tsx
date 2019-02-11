@@ -13,7 +13,10 @@ const AppRouter = () => (
       <Route path="/cart" component={Cart} />
       <Route path="/user" component={User} />
       <Route path="/product/list" component={ProductList} />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 87ad1340d0d216bb175a10a7a1764f07bc58508f
     </div>
   </Router>
 );

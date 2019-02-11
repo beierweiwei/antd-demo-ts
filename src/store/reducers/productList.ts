@@ -5,7 +5,11 @@ export default function productList (state = {
   products: {
     isLoading: false, 
     curtPage: 0,
+<<<<<<< HEAD
     pageSize: 10,
+=======
+    pageSize: 2,
+>>>>>>> 87ad1340d0d216bb175a10a7a1764f07bc58508f
     list: [],
     isAllLoaded: false,
     count: 0

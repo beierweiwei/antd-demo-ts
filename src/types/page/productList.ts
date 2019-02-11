@@ -7,5 +7,4 @@ interface ProductListPage {
     desc?: string
     _id?: string
   }
-
 }
