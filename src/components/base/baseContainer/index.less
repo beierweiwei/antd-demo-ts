@@ -1,0 +1,37 @@
+@import "../../../style/util/index.less";
+
+@prefix: shop-c-container;
+
+.@{prefix} {
+  background: @fill-base;
+  &-header {
+    display: flex;
+    padding: px2rem(10) px2rem(14);
+    .px2px(@font-size-subhead);
+    line-height: @line-height-base;
+    border-bottom: 1px solid @border-color-base;
+    &-content {
+      flex: 1 1;
+      display: flex;
+      align-items: center;
+      color: @color-text-base;
+      text-align: left;
+    }
+    &-extra {
+      flex: 1 1;
+      text-align: right;
+      color: @color-text-secondary;
+      * {
+        vertical-align: middle;
+      }
+      .am-icon {
+        display: inline-block;
+        margin-left: -1 * px2rem(10);
+        margin-top: -1 * px2rem(2);
+      }
+    }
+  }
+  &-body {
+    padding: px2rem(10) px2rem(14);
+  }
+}

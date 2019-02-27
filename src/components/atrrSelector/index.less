@@ -1,0 +1,50 @@
+@import "../../style/util/index.less";
+@prefix:shop-attrselector;
+.@{prefix} {
+  height: px2rem(400);
+  padding-bottom: px2rem(50)!important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: left;
+  &-intro {
+    .clearfix();
+    &-thumb {
+      float: left;
+      margin-right: px2rem(10);
+      width: px2rem(107);
+      height: px2rem(75);
+      overflow: hidden;
+      img  {
+        width: 100%;
+        height: auto;
+        border: none;
+      }
+    }
+  }
+  &-title {
+    .px2px(14);
+    line-height: px2rem(20);
+    height: px2rem(40);
+    color: @color-text-base;
+  }
+  &-num-selector {
+    float: right;
+  }
+  &-props {
+    &-type {
+      margin-top: px2rem(12);
+      .px2px(14);
+      color: @color-text-secondary;
+    }
+    &-list {
+      margin-top: px2rem(8);
+      margin-right: - px2rem(10);
+      display: flex;
+      >div {
+        min-width: px2rem(48);
+        flex: 0 0 auto;
+        margin-right: px2rem(10);
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export const componentPrefix = 'shop'

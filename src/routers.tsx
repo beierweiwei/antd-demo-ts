@@ -5,6 +5,7 @@ import User from './pages/user'
 import Cate from './container/cate'
 import Cart from './pages/cart'
 import ProductList from './container/productList'
+import ProductDetail from './pages/product/detail'
 const AppRouter = () => (
   <Router>
     <div className="router-container">
@@ -13,10 +14,7 @@ const AppRouter = () => (
       <Route path="/cart" component={Cart} />
       <Route path="/user" component={User} />
       <Route path="/product/list" component={ProductList} />
-<<<<<<< HEAD
-
-=======
->>>>>>> 87ad1340d0d216bb175a10a7a1764f07bc58508f
+      <Route path="/product/detail" component={ProductDetail} />
     </div>
   </Router>
 );
