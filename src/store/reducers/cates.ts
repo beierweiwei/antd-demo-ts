@@ -9,7 +9,7 @@ export const fetchProductCates: ThunkAction<any, any, any, any> = (disPatch, get
   return Http.get('/product/cate')
     .then(
     (res: any) => disPatch(receiveProductCates({data: res})),
-      err => console.log(err.message)
+      (err:Error) => console.log(err.message)
     )
 }
 interface ReceiveProductCates extends Action<actions.RECEIVE_PRODUCT_CATES> {

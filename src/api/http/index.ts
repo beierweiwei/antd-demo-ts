@@ -1,7 +1,9 @@
-import axios from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import config from './config'
 import { CODE_MSG } from '../../constants/request'
 import AppConfig from '../../config/dev'
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory()
 const { api } = AppConfig 
 console.log(api)
 declare module 'axios' {
@@ -9,6 +11,7 @@ declare module 'axios' {
     prompt?: any
   }
 }
+
 const Http = axios.create({ ...config, ...api})
 
 export const HandleResponse = (res:any) => {
@@ -18,8 +21,8 @@ export const HandleResponse = (res:any) => {
   } else {
     switch (res.data.code) {
       case 201:
-        // window.$VUE_ADMIN.$router.push({ name: 'login' })
-        break
+      history.push('/login')
+      break
     }
     return handleError(res.data)
   }
@@ -29,6 +32,7 @@ export const handleError = (res:any) => {
   if (Http.defaults.prompt) {
     Http.defaults.prompt(CODE_MSG[res.code])
   }
+  console.log(res.code, res.msg)
   return Promise.reject(res)
 }
 
@@ -40,4 +44,9 @@ Http.interceptors.response.use(HandleResponse, (err) => {
   console.log('app_error', err)
   return Promise.reject('error')
 })
-export default Http
+
+export interface Http extends AxiosInstance{
+  get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T>;
+  post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T>;
+}
+export default (Http as Http)

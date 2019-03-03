@@ -38,6 +38,7 @@
     "ts-import-plugin": "^1.5.5",
     "typescript": "^3.2.2"
   },
+  "proxy": "http://localhost:9000",
   "browserslist": [
     "last 2 version",
     "> 1%",

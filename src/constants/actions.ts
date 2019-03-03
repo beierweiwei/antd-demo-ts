@@ -15,3 +15,18 @@ export type RECEIVE_PRODUCT_CATES = typeof RECEIVE_PRODUCT_CATES
 
 export const RECEIVE_PRODUCTLIST_BANNERS = 'RECEIVE_PRODUCTLIST_BANNERS'
 export type RECEIVE_PRODUCTLIST_BANNERS = typeof RECEIVE_PRODUCTLIST_BANNERS
+
+export const LOGIN = 'LOGIN'
+export type LOGIN = typeof LOGIN
+
+export const LOGOUT = 'LOGOUT'
+export type LOGOUT = typeof LOGOUT 
+
+export const SAVE_USER = 'SAVE_USER'
+export type SAVE_USER = typeof SAVE_USER
+
+export const CLEAR_USER = 'CLEAR_USER'
+export type CLEAR_USER = typeof CLEAR_USER 
+
+export const CHECK_LOGIN = 'CHECK_LOGIN'
+export type CHECK_LOGIN = typeof CHECK_LOGIN

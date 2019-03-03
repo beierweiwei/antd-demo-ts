@@ -20,6 +20,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false
   },
   "exclude": [
     "node_modules",
@@ -30,6 +31,7 @@
     "jest",
     "src/setupTests.ts",
     "src/style/iconfont",
-    "config-overrides.js"
+    "config-overrides.js",
+    "src/utils/cookie.ts"
   ]
 }

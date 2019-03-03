@@ -16,7 +16,6 @@ export default function home(state: HomeState = {
   }
 },
   action: ProductAction | ReceiveAds) {
-  console.log(action)
   if (action.page === 'home') {
     const productsState = products(state.products, (action as ProductAction))
     const adsState = ads(state.ads, (action as ReceiveAds))

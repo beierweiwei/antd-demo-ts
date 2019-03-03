@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import App from './App';
 import './index.less';
 import registerServiceWorker from './registerServiceWorker'
+import AppRouter from './routers';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AppRouter />
   </Provider>,
   document.getElementById('root') as HTMLElement
 );

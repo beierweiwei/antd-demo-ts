@@ -17,7 +17,7 @@ export const fetchAds = (query: any, page?: string): (ThunkAction<any, any, any,
       (res:any) => {
         disPatch(receiveAds(res, page))
       },
-      err => console.log(err.message)
+      (err:Error) => console.log(err.message)
     )
   } 
 }
