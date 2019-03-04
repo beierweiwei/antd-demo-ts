@@ -4,8 +4,9 @@ import BottomNav from '../../../components/loayout/bottomNav'
 import { createCateTree } from '../../../utils'
 import classnames from 'classnames'
 import './index.less'
-import { Link } from 'react-router-dom';
-interface CatePageProps {
+import { Redirect, withRouter, RouteComponentProps } from 'react-router';
+
+interface CatePageProps extends RouteComponentProps {
   [index: string]: any
 }
 interface CatePageState {
@@ -38,6 +39,7 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
       curtCateId: id
     })
   }
+  goDetail = (id: string) => this.props.history.push(`/product/list?cate=${id}`)
   render() {
     const prefix = 'product-cate'
     const { catesTree, curtCateId } = this.state
@@ -46,7 +48,7 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
     return (
       <div className="page-with-nav page">
         <div className={prefix} >
-          <Flex style={{ height: '100%'}}> 
+          <Flex align="start" style={{ height: '100%'}}> 
             <div className={`${prefix}-left`}>
               {this.state.catesTree.map((topCate) => (
                 <div 
@@ -72,18 +74,15 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
                         <div className={`${prefix}-second-item`}>{secondCate.name}</div>
                         {secondCate.children && secondCate.children.map((thirdCate:any) => {
                           return (
-                            <Link 
-                              to={`/product/list?cate=${thirdCate._id}`}
-                              key={thirdCate._id}  
-                            >
                                 <Button
+                                  key={thirdCate._id}
                                   className={`${prefix}-third`}
                                   inline={true} 
-                                  size="small" 
-                                >
+                                  size="small"
+                                  onClick={() => this.goDetail(thirdCate._id)}
+                                > 
                                 {thirdCate.name}
-                              </Button>
-                            </Link>
+                                </Button>
                           )
                         })}
                       </div>
@@ -99,4 +98,4 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
     )
   }
 }
-export default CatePage
+export default withRouter(CatePage) 

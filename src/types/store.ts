@@ -4,4 +4,5 @@ interface StoreState {
   productCates: ProductCateState
   home: HomeState
   user: UserState
+  system: SystemState
 }

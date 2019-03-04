@@ -29,6 +29,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
         <Carousel
           autoplay={true}
           infinite={true}
+          className={`${prefix}-activity`}
         >
           {this.props.ads.list.map(activity => (
             <a
@@ -40,10 +41,9 @@ class HomePage extends React.Component<HomePageProps, HomePageState> {
                 src={activity.thumb}
                 alt=""
                 style={{ width: '100%', verticalAlign: 'top'}}
-                // onLoad={ () => {
-                //   window.dispatchEvent(new Event('resize'))
-                //   this.setState({imgHeight: 'auto'})
-                // }}
+                onLoad={ () => {
+                  window.dispatchEvent(new Event('resize'))
+                }}
               />
             </a>
           ))}

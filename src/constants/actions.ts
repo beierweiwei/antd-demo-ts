@@ -30,3 +30,9 @@ export type CLEAR_USER = typeof CLEAR_USER
 
 export const CHECK_LOGIN = 'CHECK_LOGIN'
 export type CHECK_LOGIN = typeof CHECK_LOGIN
+
+export const SET_TITLE = 'SET_TITLT'
+export type SET_TITLE = typeof SET_TITLE
+
+export const SET_SYSTEM = 'SET_SYSTEM'
+export type SET_SYSTEM = typeof SET_SYSTEM 

@@ -8,7 +8,7 @@ import ProductList from './container/productList'
 import ProductDetail from './pages/product/detail'
 import { LoginPageContainer, RegistPageContainer } from './container/user'
 import Main from './App';
-import CheckLogin from './components/logic/checkLogin';
+import RouteHook from './components/logic/routeHook';
 
 const routers = [
   {
@@ -17,7 +17,7 @@ const routers = [
     // component: import('./container/home'),
     exact: true,
     meta: {
-      title: '首页'
+      title: '首页',
     }
   },
   {
@@ -35,17 +35,18 @@ const routers = [
     component: Cart,
     exact: true,
     meta: {
-      title: '首页'
+      title: '购物车'
     }
   },
   {
-    path: '/user/:123',
+    path: '/user',
     // component: import('./pages/cart'),
     component: User,
     exact: true,
     author: true,
     meta: {
-      title: '首页'
+      title: '用户中心',
+      author: true 
     }
   },
   {
@@ -70,7 +71,6 @@ const routers = [
     path: '/product/list',
     component: ProductList,
     // component: import('./container/productList'),
-    exact: true,
     meta: {
       title: '商品列表'
     }
@@ -79,33 +79,19 @@ const routers = [
     path: '/product/detail',
     component: ProductDetail,
     // component: import('./container/productList'),
-    exact: true,
     meta: {
       title: '商品详情'
     }
   },
 ]
 
-const renderRoute = ({component, path, exact, meta, author}:any) => {
-  if (author) {
-    const c = CheckLogin(component)
-    return <Route path={path} component={c} key={path} exact={exact} /> 
-  } else {
-    return <Route path={path} component={component} exact={exact} key={path}/>
-  }
-  
+const renderRoute = ({component, path, exact, meta, author}:any) => { 
+  const WrapedComp = RouteHook(component)
+  return <Route path={path} render={(props) => <WrapedComp  title={meta.title} author={!!author}/>} key={path} exact={exact} /> 
 }
 const AppRouter = () => (
   <Router>
     <Main>
-      {/* <Route path="/" exact={true} component={Home} />
-      <Route path="/cate" component={Cate} />
-      <Route path="/cart" component={Cart} />
-      <Route path="/user" component={CheckLogin(User)} staticContext='用户中心'/>
-      <Route path="/product/list" component={ProductList} />
-      <Route path="/product/detail" component={ProductDetail} />
-      <Route path="/login" component={LoginPageContainer} />
-      <Route path="/regist" component={RegistPageContainer} /> */}
       {routers.map(renderRoute)}
     </Main>
   </Router>

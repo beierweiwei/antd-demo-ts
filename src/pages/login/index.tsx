@@ -65,20 +65,15 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageStatus> {
   }
   submit = () => {
     if (!this.validateAll()) {
-      this.props.postLogin(this.state.form).then(() => this.props.history.push('/user/123'))
+      this.props.postLogin(this.state.form).then(() => this.props.history.push('/user'))
     }
   }
   postLogin = () => {
     Http.post(API.LOGIN, this.state.form).then(res => {
       Cookie.set('user', res)
-      console.log('-------------')
-      this.props.history.push('/user/xxxxxxx')
+      this.props.history.push('/user')
     })
   }
-  componentWillMount () {
-    console.log('xxxxx')  
-  }
-
   render () {
     const prefixCls = 'login-page'
     const { form, validatedMsgs } = this.state 

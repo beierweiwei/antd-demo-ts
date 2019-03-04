@@ -1,8 +1,14 @@
-import * as React from 'react'
-const homePage = () => {
-  return (
-    <div>User</div>
-  )
-}
+import React, { Component } from 'react'
 
-export default homePage
+export default class User extends Component {
+  componentWillMount () {
+    console.log(this.props)
+  }
+  render() {
+    return (
+      <div>
+        user
+      </div>
+    )
+  }
+}

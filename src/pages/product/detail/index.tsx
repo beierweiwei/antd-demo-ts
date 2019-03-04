@@ -6,7 +6,8 @@ import AttrSelector from '../../../components/atrrSelector'
 import { less } from './../../../constants'
 import './index.less'
 import BaseContainer from 'src/components/base/baseContainer';
-interface DetailPageProps extends Product {
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+interface DetailPageProps extends RouteComponentProps {
   [index: string]: any
 }
 
@@ -28,7 +29,7 @@ interface SubProd {
   price: number
   title: string
 }
-export default class ProductDetail extends React.Component <DetailPageProps, DetailPageState> {
+class ProductDetail extends React.Component <DetailPageProps, DetailPageState> {
   constructor (props: DetailPageProps) {
     super(props)
     this.state = {
@@ -142,7 +143,7 @@ export default class ProductDetail extends React.Component <DetailPageProps, Det
           className={carouselClass}
         >
           {product.thumbPic && product.thumbPic.map((thumb:string, i:number) => {
-            return (<img src={thumb} key={i}/>)
+            return (<img src={thumb} key={i} onLoad={() => window.dispatchEvent(new Event('resize'))}/>)
           })}
         </Carousel>
         <div className={`${c}-plywood ${introClass}`}>
@@ -234,3 +235,5 @@ export default class ProductDetail extends React.Component <DetailPageProps, Det
     )
   }
 }
+
+export default withRouter(ProductDetail)
