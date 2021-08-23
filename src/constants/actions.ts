@@ -36,3 +36,18 @@ export type SET_TITLE = typeof SET_TITLE
 
 export const SET_SYSTEM = 'SET_SYSTEM'
 export type SET_SYSTEM = typeof SET_SYSTEM 
+
+export const SAVE_ORDER = 'SAVE_ORDER'
+export type SAVE_ORDER = typeof SAVE_ORDER 
+
+export const REQUEST_ORDER = 'REQUEST_ORDER'
+export type REQUEST_ORDER = typeof REQUEST_ORDER
+
+export const SET_CART_STATUS = 'SET_CART_STATUS'
+export type SET_CART_STATUS = typeof SET_CART_STATUS
+
+export const SET_CART_PRODUCTS = 'SET_CART_PRODUCTS'
+export type SET_CART_PRODUCTS = typeof SET_CART_PRODUCTS 
+
+
+

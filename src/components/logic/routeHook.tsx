@@ -16,10 +16,14 @@ const RouteHookC = <P extends object>(
     user,
     author,
     setTitle,
+    title,
     ...props
   }: RouteHookProps) => {
     // tslint:disable-next-line:curly
-    if (setTitle)  setTimeout(() => setTitle(), 0)
+    if (setTitle)  setTimeout(() => {
+      setTitle()  
+      document.title = title
+    }, 0)
     return author ? user && user.isLogin ? <Component {...props as P} /> : <Redirect to="/login" /> :<Component {...props as P} /> 
   }
 

@@ -1,19 +1,16 @@
 import * as React from 'react'
 import ProductList from '../../../components/productList'
-interface ProudctListPageProps {
-  [index:string]: any 
-}
+import { ThunkAction } from 'redux-thunk'
 
-interface ProudctListPageState {
-  [index:string]: any 
-}
 
-class ProudctListPage extends React.Component<ProudctListPageProps, ProudctListPageState> {
-  constructor (props: ProudctListPageProps) {
+// interface ProductListPageProps extends ProductListPage {
+// }
+
+class ProductListPage extends React.Component<any> {
+  constructor(props: any) {
     super(props)
   }
   componentDidMount() {
-    console.log('mount')
     this.props.fetchProducts({pageSize: 2, curtPage: 0})
   }
   render () {
@@ -25,4 +22,4 @@ class ProudctListPage extends React.Component<ProudctListPageProps, ProudctListP
   }
 }
 
-export default ProudctListPage
+export default ProductListPage

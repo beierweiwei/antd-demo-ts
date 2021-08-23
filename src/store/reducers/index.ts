@@ -1,14 +1,18 @@
 import { combineReducers } from 'redux'
 import productCates from './cates'
 import home from './home'
-import productList from './productList'
+import products from './products'
 import user from './user'
 import system from './system'
+import order from './order';
+import cart from './cart'
 const rootReducer = combineReducers({
   productCates,
   home,
-  productList,
+  products,
   user,
-  system
+  system,
+  order,
+  cart
 })
 export default rootReducer

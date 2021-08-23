@@ -1,13 +1,9 @@
 import { connect } from 'react-redux'
-import LoginPage from '../pages/login'
-import RegistPage from '../pages/login/regist'
-import { postLogin } from 'src/store/actions/user';
-import { ThunkDispatch } from 'redux-thunk';
+import User from 'src/pages/user';
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, any>) => {
+const mapStateToProps = ({user}:StoreState) => {
   return {
-    postLogin: (params:any) => dispatch(postLogin(params)),
+    ...user.user
   }
 }
-export const LoginPageContainer = connect(null, mapDispatchToProps)(LoginPage)
-export const RegistPageContainer = connect(null, mapDispatchToProps)(RegistPage)
+export default connect(mapStateToProps)(User)

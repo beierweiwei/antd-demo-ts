@@ -4,7 +4,7 @@ import BottomNav from '../../../components/loayout/bottomNav'
 import { createCateTree } from '../../../utils'
 import classnames from 'classnames'
 import './index.less'
-import { Redirect, withRouter, RouteComponentProps } from 'react-router';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 interface CatePageProps extends RouteComponentProps {
   [index: string]: any
@@ -52,7 +52,6 @@ class CatePage extends React.Component<CatePageProps, CatePageState> {
             <div className={`${prefix}-left`}>
               {this.state.catesTree.map((topCate) => (
                 <div 
-                  // className={(this.state.curtCateId === topCate._id ? 'active ' : '') + `${prefix}-top-level`}
                   className={classnames({ active: this.state.curtCateId === topCate._id }, `${prefix}-top-level`)}
                   onClick={(e) => this.handleTopCateClick(topCate._id)}
                   key={topCate._id}

@@ -9,6 +9,7 @@ export default function products(state: ProductState = {
   list: []
 },
   action: ProductAction) {
+  console.log(state)
   switch (action.type) {
     case actions.REQUEST_PRODUCTS:
       // 下拉加载会促发多次request，根据isLoading来判断是否更新请求参数
@@ -29,6 +30,7 @@ export default function products(state: ProductState = {
     case actions.RECEIVE_PRODUCTS:
       let isAllLoaded = state.isAllLoaded
       const data = action.data || {}
+      console.log('---------', data)
       if (isAllLoaded) {
         return state
       } else {
@@ -38,8 +40,8 @@ export default function products(state: ProductState = {
           isAllLoaded,
           isLoading: false,
           list: [
-            ...state.list,
-            ...(data.list || [])
+            ...(state.list),
+            ...(data.list)
           ],
           count: data.count
         }

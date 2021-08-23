@@ -22,6 +22,7 @@ export const fetchAds = (query: any, page?: string): (ThunkAction<any, any, any,
   } 
 }
 
+
 export const receiveAds = (data = {list: [], count: 0}, page = ''): ReceiveAds => {
   return {
     type: actions.RECEIVE_ADS,

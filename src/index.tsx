@@ -5,7 +5,10 @@ import store from './store'
 import './index.less';
 import registerServiceWorker from './registerServiceWorker'
 import AppRouter from './routers';
-
+import { Http } from './api';
+import { GET_USER_INFO } from './api/api';
+import { getUserInfo } from './store/actions/user'
+// store.dispatch(getUserInfo)
 ReactDOM.render(
   <Provider store={store}>
     <AppRouter />

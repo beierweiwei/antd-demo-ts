@@ -5,7 +5,6 @@ import AppConfig from '../../config/dev'
 import { createBrowserHistory } from 'history';
 const history = createBrowserHistory()
 const { api } = AppConfig 
-console.log(api)
 declare module 'axios' {
   interface AxiosRequestConfig {
     prompt?: any

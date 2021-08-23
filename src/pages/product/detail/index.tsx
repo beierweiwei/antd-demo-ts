@@ -7,6 +7,8 @@ import { less } from './../../../constants'
 import './index.less'
 import BaseContainer from 'src/components/base/baseContainer';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import qs from 'qs';
+import _ from 'lodash'
 interface DetailPageProps extends RouteComponentProps {
   [index: string]: any
 }
@@ -53,6 +55,7 @@ class ProductDetail extends React.Component <DetailPageProps, DetailPageState> {
     this.onCheckProp = this.onCheckProp.bind(this)
     this.onSelectedNumChange = this.onSelectedNumChange.bind(this)
     this.getCurtSubProd = this.getCurtSubProd.bind(this)
+    this.onAddCart = this.onAddCart.bind(this)
   }
   showAttrSelector (visible:boolean):void {
     let attrSelector = this.state.attrSelector
@@ -69,7 +72,6 @@ class ProductDetail extends React.Component <DetailPageProps, DetailPageState> {
     selectedProps[i] = isSelected ? propItems : ''
     this.setState((preState, props) => ({ attrSelector: {...attrSelector, selectedProps}}))
   }
- 
   onSelectedNumChange(value:any) {
     const attrSelector = this.state.attrSelector 
     let { subProds2Num } = attrSelector
@@ -85,11 +87,63 @@ class ProductDetail extends React.Component <DetailPageProps, DetailPageState> {
     }
     
   }
-  onClickBuy() {
-    // 判断登陆 -- 登陆页    
-    // 计算已经选择商品id和数量
-    // 提交结算接口校验  -- 提示失败原因
-    // 进入结算页面，选择优惠券，满减券，支付方式
+  onClickBuy = () => {
+    const subProds = this.state.product.subProds || []
+    const product2Id = subProds.length > 0 ? this.filterSubProds2Num() : {[this.state.product._id]: 1}
+    if (_.isEmpty(product2Id)) { 
+      return Toast.fail('请选择至少一件商品！') 
+    }
+    const queryObj = {
+      productIds: Object.keys(product2Id),
+      nums: Object.keys(product2Id).map(k => product2Id[k])
+    }
+    
+    // tslint:disable-next-line:no-unused-expression
+    if (this.validateStock()) {
+      this.props.history.push({ pathname: '/statement', search: qs.stringify(queryObj) })
+    } else {
+      Toast.fail('库存不足')
+    }
+  }
+  onAddCart = () => {
+    const subProds = this.state.product.subProds || []
+    const product2Id = subProds.length > 0 ? this.filterSubProds2Num() : { [this.state.product._id]: 1 }
+    if (_.isEmpty(product2Id)) {
+      return Toast.fail('请选择至少一件商品！')
+    }
+    Http.post('/cart/my', { productNums: product2Id }).then(res => Toast.success('加入购物车成功！'))
+    // const id = this.
+    // Http.post(CART, {id: this.})
+  }
+  onCartClick = () => {
+    this.props.history.push({pathname: '/cart'})
+  }
+  validateStock = () => {
+    // hasSubProds 
+    const subProds = this.state.product.subProds 
+    const subProds2Num = this.filterSubProds2Num() 
+    if (subProds && subProds.length > 0) {
+      const selectedIds = Object.keys(subProds2Num)
+      // tslint:disable-next-line:curly
+      if (!selectedIds.length) return false
+      for (let i = selectedIds.length - 1; i >= 0; i--) {
+        const id = selectedIds[i]
+        const subProd = subProds.find((item: SubProd) => item._id === id)
+        if (!subProd || selectedIds[id] > subProd.num) {
+          return false
+        }
+      }
+      return true 
+    } else {
+      return this.state.product.stock > 0
+    }
+    
+  }
+  filterSubProds2Num = () => {
+    const res = {}
+    const subProds2Num = this.state.attrSelector.subProds2Num
+    Object.keys(subProds2Num).filter(id => subProds2Num[id] > 0).forEach(id => (res[id] = subProds2Num[id]))
+    return res 
   }
   getCurtSubProd () {
     const subProds = this.state.product.subProds
@@ -220,14 +274,16 @@ class ProductDetail extends React.Component <DetailPageProps, DetailPageState> {
               <i className="iconfont icon-love"/>
               <span>收藏</span>
             </div>
-            <div className={`${prefixClass}-cart`}>
+            <div className={`${prefixClass}-cart`} onClick={this.onCartClick} >
               <i className="iconfont icon-cart"/>
               <span>购物车</span>
             </div>
-            <div className={`${prefixClass}-add`}>
+          <div className={`${prefixClass}-add`} onClick={this.onAddCart}>
               加入购物车
             </div>
-            <div className={`${prefixClass}-buy`}>
+            <div className={`${prefixClass}-buy`}
+              onClick={this.onClickBuy}
+            >
               立即购买
             </div>
         </div>

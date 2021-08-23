@@ -15,12 +15,14 @@ interface LoginPageStatus {
     password: string
     tel?: string
     smsCode?: string
+    payPassword: string 
   },
   validatedMsgs: {
     username?: string
     password?: string
     tel?: string | number
     smsCode?: string | number
+    payPassword: string 
   },
   [index:string]: any
 }
@@ -32,10 +34,12 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageStatus> {
       form: {
         username: '',
         password: '',
+        payPassword: ''
       },
       validatedMsgs: {
         password: '',
-        username: ''
+        username: '',
+        payPassword: ''
       }
     }
   }
@@ -78,7 +82,7 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageStatus> {
   render() {
     const prefixCls = 'login-page'
     const { form, validatedMsgs } = this.state
-    const { username, password } = form
+    const { username, password, payPassword } = form
     return (
       <div className={`${prefixCls}`}>
         <List renderFooter={<Button className={`${prefixCls}-submit`} onClick={this.submit}>注册</Button>}>
@@ -100,6 +104,16 @@ class LoginPage extends React.Component<LoginPageProps, LoginPageStatus> {
             onChange={value => this.setParamsAndValidate(value, 'password', ['password', 'require'])}
             error={!!validatedMsgs.password}
             onErrorClick={() => this.showErrorMsg('password')}
+          />
+
+          <InputItem
+            type="password"
+            placeholder="6位数密码"
+            clear={true}
+            value={payPassword}
+            onChange={value => this.setParamsAndValidate(value, 'payPassword', ['payPassword', 'require'])}
+            error={!!validatedMsgs.payPassword}
+            onErrorClick={() => this.showErrorMsg('payPassword')}
           />
         </List>
       </div>

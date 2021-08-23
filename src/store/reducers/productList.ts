@@ -10,7 +10,7 @@ export default function productList (state = {
     isAllLoaded: false,
     count: 0
   },
-  bannerData: undefined
+  bannerData: {}
 
 }, action:any) {
   if (action.page === 'productList') {

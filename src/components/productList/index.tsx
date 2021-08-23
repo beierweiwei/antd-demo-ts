@@ -69,7 +69,7 @@ class ProductList extends React.Component<ProductListProps, ProductListState> {
             refreshing={this.props.products.isLoading}
             onRefresh={this.handelOnFresh}
             distanceToRefresh={25}
-
+            getScrollContainer={() => this.ptr}
           >
             <div className="product-list">
               <Grid

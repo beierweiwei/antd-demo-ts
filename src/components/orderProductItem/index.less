@@ -1,0 +1,48 @@
+@import "../../style/util/index.less";
+.order-product-item {
+  &-wrap {
+    display: flex;
+  }
+  // background-color: #ccc;
+  &-img {
+    width: px2rem(60);
+    height: px2rem(60);
+    line-height: px2rem(60);
+    flex: 0 0 px2rem(60);
+    overflow: hidden;
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+  &-body {
+    flex: 1;
+    text-align: left;
+    padding-left: px2rem(20);
+    padding-right: px2rem(20);
+  }
+  &-title {
+    width: 100%;
+    height: px2rem(34);
+    line-height: px2rem(17);
+    .ellipsis-line();
+    color: @color-text-paragraph;
+  }
+  &-attr {
+    color: @color-text-caption;
+  }
+  &-number {
+    flex: 0 0 auto;
+    color: @color-text-caption;
+  }
+  &-sales {
+    color: @color-text-caption;
+    vertical-align: middle;
+  }
+  &-price {
+    vertical-align: middle;
+    &-numwjj {
+      color: @color-text-caption;
+    }
+  }
+}

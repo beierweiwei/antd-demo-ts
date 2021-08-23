@@ -23,7 +23,7 @@ interface ProductListApi {
 export interface ReceiveProductsAction  {
   type: actions.RECEIVE_PRODUCTS
   data: ProductListApi
-  page?: string 
+  page?: number 
 }
 
 
@@ -39,7 +39,7 @@ export function requestProducts (query: OptionQuery, page?:string):RequestProduc
   }
 }
 
-export function receiveProducts(data:ProductListApi, page?:string): ReceiveProductsAction{
+export function receiveProducts(data:ProductListApi, page?:number): ReceiveProductsAction{
   return {
     type: actions.RECEIVE_PRODUCTS,
     data,
@@ -47,18 +47,21 @@ export function receiveProducts(data:ProductListApi, page?:string): ReceiveProdu
   }
 }
 
-export const fetchProducts: AsyncAction<any, StoreState, OptionQuery, RequestProductAction> = (query, page) => {
+export const fetchProducts: AsyncAction<any, StoreState, OptionQuery, RequestProductAction> = (query: RequestQuery) => {
   return  (dispatch, getState) => {
-    dispatch(requestProducts(query, page))
+    dispatch(requestProducts(query))
     const state = getState()
     const tempQuery:any = {}
-    tempQuery.pageSize = state[page].products.pageSize
-    tempQuery.curtPage = state[page].products.curtPage
+    const { curtPage } = query
+  
+    tempQuery.pageSize = state.home.products.pageSize
+    tempQuery.curtPage = state.home.products.curtPage
   
     return Http.get('product/list', { params: tempQuery})
       .then(
         (res:any) => {
-          dispatch(receiveProducts(res, page))
+          console.log(res)
+          dispatch(receiveProducts(res, curtPage))
         },
         err => console.log(err.message)
       ) 

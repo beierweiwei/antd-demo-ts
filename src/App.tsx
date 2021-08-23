@@ -10,14 +10,12 @@ export class App extends React.Component<AppProps> {
     const { children } = this.props
     return (
       <Flex direction="column" align="start" className="App">
-       <HeaderContainer/>
-        <Flex.Item style={{width: '100%', overflow: 'auto'}}>
+       <HeaderContainer />
+        <Flex.Item className="shop-main" style={{width: '100%', overflow: 'auto'}}>
           {children}
         </Flex.Item>
       </Flex>
     );
   }
 }
-
-
 export default App

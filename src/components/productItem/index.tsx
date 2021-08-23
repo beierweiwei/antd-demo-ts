@@ -8,7 +8,7 @@ const ProductItem = (props:Product) => {
     <div className={`${prefix}`}>
       <Link to={`/product/detail/${props._id}`}> 
         <div className={`${prefix}-img`}>
-          <img src={props.thumbPic[0]} alt={props.title}/>
+          <img src={props.thumbPic && props.thumbPic[0]} alt={props.title}/>
         </div>
         <div className={`${prefix}-bottom`}>
           <div className={`${prefix}-title`}>

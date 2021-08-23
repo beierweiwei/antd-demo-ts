@@ -10,6 +10,7 @@ interface Product {
   cateId: object
   subProds:[]
   _id: string
+  buyNum?: number 
 }
 interface ProductState {
   isLoading: boolean

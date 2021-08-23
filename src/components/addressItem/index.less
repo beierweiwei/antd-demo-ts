@@ -1,0 +1,29 @@
+@import "../../style/util/index.less";
+@prefixCls:address_item;
+.@{prefixCls} {
+  &-wrap {
+    .px2px(@font-size-base);
+    color: @color-text-paragraph;
+  }
+  &-receiver {
+
+  }
+  &-receiver_tel {
+    color: @color-text-caption;
+    .px2px(@font-size-caption-sm)
+  }
+  &-footer {
+    margin-top: px2rem(10);
+    .am-button {
+      display: inline-block;
+      padding: 0 px2rem(20);
+      height: auto;
+      line-height: 2;
+      .px2px(@font-size-caption-sm);
+    }
+    
+  }
+  .am-list-thumb:first-child {
+    margin-top: -1 * px2rem(30);
+  }
+}

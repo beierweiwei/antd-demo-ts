@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import ProductListPage from '../pages/product/list'
 import { fetchProducts, OptionQuery } from '../store/actions'
 import { ThunkDispatch } from 'redux-thunk';
-const mapStateToprops = ({ productList }: StoreState) => {
+const mapStateToProps = ({ products }: StoreState) => {
   return {
-    ...productList
+    products
   }
 }
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, any>) => {
@@ -12,5 +12,5 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, any>) => {
     fetchProducts: (query: OptionQuery) => dispatch(fetchProducts(query, 'productList')),
   }
 }
-const ProductListPageContainer = connect(mapStateToprops, mapDispatchToProps)(ProductListPage)
+const ProductListPageContainer = connect(mapStateToProps, mapDispatchToProps)(ProductListPage)
 export default ProductListPageContainer

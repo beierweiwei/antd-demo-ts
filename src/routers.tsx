@@ -1,15 +1,20 @@
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import * as React from 'react'
 import Home from './container/home'
-import User from './pages/user'
+import User from './container/user'
 import Cate from './container/cate'
-import Cart from './pages/cart'
+import Cart from './container/cart'
 import ProductList from './container/productList'
 import ProductDetail from './pages/product/detail'
-import { LoginPageContainer, RegistPageContainer } from './container/user'
+import { LoginPageContainer, RegistPageContainer } from './container/login'
 import Main from './App';
 import RouteHook from './components/logic/routeHook';
-
+import Statement from './pages/statement';
+import Address from './pages/address';
+import AddressList from './container/addressList';
+import { success, fail } from './pages/pay';
+import OrderDetail from './pages/order/detail';
+import OrderList from './container/order';
 const routers = [
   {
     path: '/',
@@ -43,7 +48,7 @@ const routers = [
     // component: import('./pages/cart'),
     component: User,
     exact: true,
-    author: true,
+    // author: true,
     meta: {
       title: '用户中心',
       author: true 
@@ -83,11 +88,68 @@ const routers = [
       title: '商品详情'
     }
   },
+  {
+    path: '/statement',
+    component: Statement,
+    meta: {
+      title: '结算单'
+    }
+  },
+  {
+    path: '/address',
+    component: Address,
+    exact: true,
+    meta: {
+      title: '新增/编辑地址'
+    }
+  },
+  {
+    path: '/address/list',
+    component: AddressList,
+    exact: true,
+    // author: true,
+    meta: {
+      title: '地址列表'
+    }
+  },
+  {
+    path: '/pay/success',
+    component: success,
+    exact: true,
+    meta: {
+      title: '支付成功'
+    }
+  },
+  {
+    path: '/pay/fail',
+    component: fail,
+    exact: true,
+    meta: {
+      title: '支付失败'
+    }
+  },
+  {
+    path: '/order',
+    component: OrderList,
+    exact: true,
+    meta: {
+      title: '订单列表'
+    }
+  },
+  {
+    path: '/order/:id',
+    component: OrderDetail,
+    exact: true,
+    meta: {
+      title: '订单详情'
+    }
+  }
+ 
 ]
 
 const renderRoute = ({component, path, exact, meta, author}:any) => { 
-  const WrapedComp = RouteHook(component)
-  return <Route path={path} render={(props) => <WrapedComp  title={meta.title} author={!!author}/>} key={path} exact={exact} /> 
+  const WrappedCom = RouteHook(component)
+  return <Route path={path} render={(props) => <WrappedCom title={meta && meta.title} author={!!author}/>} key={path} exact={exact} /> 
 }
 const AppRouter = () => (
   <Router>

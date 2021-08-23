@@ -1,0 +1,17 @@
+@import "../../style/util/index.less";
+@prefix:c-payment;
+.@{prefix} {
+  &-password_wrap {
+    display: flex;
+    margin: px2rem(10) px2rem(20);
+  }
+  &-password_input_item {
+    flex: 1;
+    border: 1px solid @border-color-base;
+    line-height: px2rem(36);
+    height: px2rem(36);
+  }
+  &-password_input_item:not(:last-child) {
+    border-right: none;
+  }
+}

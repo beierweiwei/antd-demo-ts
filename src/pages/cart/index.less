@@ -1,0 +1,57 @@
+@import "../../style/util/index.less";
+@prefixCls:shop-cart;
+.@{prefixCls} {
+  position: relative;
+  padding-top: px2rem(35);
+  margin-bottom: px2rem(50);
+  height: calc(100% - px2rem(50));
+  &__header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: px2rem(35);
+    padding-left: px2rem(10);
+    padding-right: px2rem(10);
+    background-color: #fff;
+    // line-height: px2rem(35);
+  }
+  &-list {
+    height: calc(100% - px2rem(40));
+    overflow-y: auto;
+  }
+  &-list_edit {
+    height: calc(100% - px2rem(81));
+  }
+  &__bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: px2rem(40);
+    overflow: hidden;
+  }
+  &-check-bar {
+    font-size: px2rem(10);
+  }
+  &-count {
+    line-height: px2rem(40);
+    height: px2rem(40);
+    background-color: #fff;
+    
+    &__num {
+      background-color: #f00;
+      text-align: center;
+      color: #fff;
+      
+    }
+    &__money {
+      float: left;
+      padding-left: px2rem(10);
+      padding-right: px2rem(10);
+      width: 70%;
+      height: px2rem(40);
+      background-color: #fff;
+    }
+  }
+}

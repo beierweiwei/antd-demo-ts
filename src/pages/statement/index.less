@@ -1,0 +1,40 @@
+@import "./../../style/util/index.less";
+@prefix:statement;
+.@{prefix} {
+  &-comment {
+    &-input {
+      flex: 1;
+    }
+    input {
+      .px2px(14);
+    }
+  }
+  &-count-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: px2rem(50);
+    line-height: px2rem(50);
+    width: 100%;
+    background:@fill-base;
+  }
+  &-total {
+    justify-content: flex-end;
+  }
+  &-res-total {
+    padding-right: px2rem(16);
+    flex: 1;
+    text-align: right;
+  }
+  &-total_number {
+   margin-left: px2rem(10);
+   .px2px(16)
+  }
+  &-submit {
+    flex: 0 0 auto;
+    padding: 0 px2rem(15);
+    background: @color-primary;
+    color: @color-text-base-inverse;
+  }  
+}
